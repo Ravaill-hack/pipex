@@ -6,7 +6,7 @@
 /*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/09 18:48:00 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:34:33 by Lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	find_line(char *title, char **env)
 		j = 0;
 		while (env[i][j] == title[j])
 			j++;
-		if (title[j] == '\0')
+		if (title[j] == '\0' && env[i][j] == '=')
 			return (i);
 		i++;
 	}
@@ -146,39 +146,63 @@ char	*extract_path(char **env, char *cmd)
 	return (cmd);
 }
 
-int	main(int argc, char **argv)
+void	process(char *lstcmd, char **env)
 {
-	if (argc != 5)
-		return (1);
-	int 	fd_in;
-	int 	fd_out;
-	int		fd_pipe[2];
-	pid_t	id1;
-	pid_t	id2;
-	char	*cmd1[2];
-	char	*cmd2[2];
+	char	*cmd;
+	char	*path;
+	int		ret;
 
-	cmd1[0] = argv[2];
-	cmd1[1] = NULL;
-	cmd2[0] = argv[3];
-	cmd2[1] = NULL;
+	cmd = first_word(lstcmd);
+	path = extract_path(cmd, env);
+	ret = execve(path, cmd, env);
+	if (ret == -1)
+	{
+		ft_error2(cmd);
+		free(cmd);
+		exit(0);
+	}
+}
+
+void	temp(char **argv, int *fd_pipe, char **env)
+{
+	int	fd_in;
+
 	fd_in = open(argv[1], O_RDONLY);
+	dup2(fd_in,	STDIN_FILENO);
+	dup2(fd_pipe[1], STDOUT_FILENO);
+	close(fd_pipe[0]);
+	process(argv[2], env);
+}
+
+void	final(char **argv, int *fd_pipe, char **env)
+{
+	int	fd_out;
+
 	fd_out = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0744);
-	if (fd_in < 0 || fd_out < 0)
-		return (1);
-	pipe(fd_pipe);
-	id1 = fork();
-	close(fd_pipe[0]);
-	dup2(fd_in,	STDIN_FILENO); //au lieu de lire depuis stdin on lit depuis le fdin
-	dup2(fd_pipe[1], STDOUT_FILENO); //au lieu d'ecrire dans stdout on ecrit dans le pipe ([1] = partie ecriture)
-	close(fd_in);
-	close(fd_pipe[1]);
-	execve(argv[2], cmd1, NULL);
-	id2 = fork();
-	close(fd_pipe[1]);
-	dup2(fd_pipe[0], STDIN_FILENO);
 	dup2(fd_out, STDOUT_FILENO);
-	close(fd_out);
-	close(fd_pipe[0]);
-	execve(argv[3], cmd2, NULL);
+	dup2(fd_pipe[0], STDIN_FILENO);
+	close(fd_pipe[1]);
+	process(argv[3], env);
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	int		fd_pipe[2];
+	pid_t	id;
+	int		ind;
+
+	if (argc != 5)
+	{
+		ft_error1();
+		return (1);
+	}
+	ind = pipe(fd_pipe);
+	if (ind == -1)
+		exit(-1);
+	id = fork();
+	if (id == -1)
+		exit(-1);
+	if (id == 0)
+		temp(argv, fd_pipe, env);
+	final(argv, fd_pipe, env);
 }
