@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 11:50:40 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:03:21 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,8 @@ int	main(int argc, char **argv, char **env)
 	id = fork();
 	if (id == -1)
 		return (ft_error(8));
-	if (id == 0)
-	{
-		if (temp(argv, fd_pipe, env) == -1)
-			return (ft_error(2));
-	}
+	if (temp(argv, fd_pipe, env) == -1)
+		return (ft_error(2));
 	if (final(argv, fd_pipe, env) == -1)
 		return (ft_error(3));
 }
-
