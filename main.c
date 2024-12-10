@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 10:43:58 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:50:40 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	process(char *lstcmd, char **env)
 		ft_free(split_cmd);
 		free(cmd);
 		free(path);
-		exit(0);
+		exit(1);
 		return (1);
 	}
 	return (0);
@@ -73,44 +73,24 @@ int	final(char **argv, int *fd_pipe, char **env)
 	return (ret);
 }
 
-int	ft_error(int	id)
-{
-	if (id == 1)
-		ft_putstr_fd("Error : incorrect number of arguments", 2);
-	else if (id == 2)
-		ft_putstr_fd("Error : cannot execute child process", 2);
-	else if (id == 3)
-		ft_putstr_fd("Error : cannot execute parent process", 2);
-	else if (id == 4)
-		ft_putstr_fd("Error : file cannot be opened", 2);
-	else if (id == 5)
-		ft_putstr_fd("Error : file cannot be written", 2);
-	else if (id == 6)
-		ft_putstr_fd("Error : pipe creation failed", 2);
-	return (1);
-}
-
 int	main(int argc, char **argv, char **env)
 {
 	int		fd_pipe[2];
 	pid_t	id;
-	int		ind;
-	int		err;
 
 	if (argc != 5)
 		return (ft_error(1));
-	ind = pipe(fd_pipe);
-	if (ind == -1)
-		exit(-1);
+	if (pipe(fd_pipe) == -1)
+		return (ft_error(7));
 	id = fork();
 	if (id == -1)
-		exit(-1);
+		return (ft_error(8));
 	if (id == 0)
-		err = temp(argv, fd_pipe, env);
-	if (err == -1)
-		return (ft_error(2));
-	err = final(argv, fd_pipe, env);
-	if (err == -1)
+	{
+		if (temp(argv, fd_pipe, env) == -1)
+			return (ft_error(2));
+	}
+	if (final(argv, fd_pipe, env) == -1)
 		return (ft_error(3));
 }
 
