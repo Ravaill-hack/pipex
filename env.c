@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:58:25 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 14:36:32 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:52:03 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 char **organize_cmd(int argc, char **argv)
 {
 	int	i;
+	int	j;
 	char **cmd;
 
 	i = 2;
+	j = 0;
 	cmd = malloc((argc - 3 + 1) * sizeof(char*));
 	if (!cmd)
 		return (NULL);
-	while (i < argc - 1)
+	while (i < argc)
 	{
-		cmd[i] = ft_strdup(argv[i]);
+		cmd[j] = ft_strdup(argv[i]);
 		i++;
+		j++;
 	}
 	cmd[i] = NULL;
 	return (cmd);

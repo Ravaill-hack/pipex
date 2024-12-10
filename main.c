@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 14:50:33 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:52:43 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ pid_t	exec_2_cmd(int fd_in, int fd_out, char **cmd, char **env)
 		return(ft_error("Error : fork execution failed"));
 	if (id_cmd[0] == 0)
 	{
-		close(fd_pipe[1]);
-		exec_cmd(cmd[0], env, fd_in, fd_pipe[0]);
+		close(fd_pipe[0]);
+		exec_cmd(cmd[0], env, fd_in, fd_pipe[1]);
 	}
 	id_cmd[1] = fork();
 	if (id_cmd[1] == -1)
 		return(ft_error("Error : fork execution failed"));
 	if (id_cmd[1] == 0)
 	{
-		close(fd_pipe[0]);
-		exec_cmd(cmd[1], env, fd_pipe[1], fd_out);
+		close(fd_pipe[1]);
+		exec_cmd(cmd[1], env, fd_pipe[0], fd_out);
 	}
 	close_all_fd(fd_in, fd_out, fd_pipe);
 	wait_for_all_pids(id_cmd);
