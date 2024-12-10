@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:58:25 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/09 20:07:19 by Lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 09:19:46 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	find_line(char *title, char **env)
 	return (-1);
 }
 
-char *first_word(char *str)
+char	*first_word(char *str)
 {
 	int		i;
 	int		j;
