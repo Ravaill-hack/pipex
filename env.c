@@ -6,21 +6,21 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:58:25 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 15:52:03 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:42:41 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char **organize_cmd(int argc, char **argv)
+char	**organize_cmd(int argc, char **argv)
 {
-	int	i;
-	int	j;
-	char **cmd;
+	int		i;
+	int		j;
+	char	**cmd;
 
 	i = 2;
 	j = 0;
-	cmd = malloc((argc - 3 + 1) * sizeof(char*));
+	cmd = malloc((argc - 3 + 1) * sizeof(char *));
 	if (!cmd)
 		return (NULL);
 	while (i < argc)

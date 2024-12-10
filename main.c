@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 15:52:43 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:44:16 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ pid_t	exec_2_cmd(int fd_in, int fd_out, char **cmd, char **env)
 	pid_t	id_cmd[2];
 
 	if (pipe(fd_pipe) == -1)
-		return(ft_error("Error : pipe creation failed"));
+		return (ft_error("Error : pipe creation failed"));
 	id_cmd[0] = fork();
 	if (id_cmd[0] == -1)
-		return(ft_error("Error : fork execution failed"));
+		return (ft_error("Error : fork execution failed"));
 	if (id_cmd[0] == 0)
 	{
 		close(fd_pipe[0]);
@@ -64,7 +64,7 @@ pid_t	exec_2_cmd(int fd_in, int fd_out, char **cmd, char **env)
 	}
 	id_cmd[1] = fork();
 	if (id_cmd[1] == -1)
-		return(ft_error("Error : fork execution failed"));
+		return (ft_error("Error : fork execution failed"));
 	if (id_cmd[1] == 0)
 	{
 		close(fd_pipe[1]);
@@ -80,7 +80,7 @@ int	main(int argc, char **argv, char **env)
 	int		fd_in;
 	int		fd_out;
 	pid_t	id;
-	char 	**cmd;
+	char	**cmd;
 
 	cmd = NULL;
 	if (argc != 5)
@@ -97,7 +97,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		ft_error("Error : cannot create or write in outfile");
 		exit(EXIT_FAILURE);
-	}	
+	}
 	id = exec_2_cmd(fd_in, fd_out, cmd, env);
 	close_2_fd(fd_in, fd_out);
 	waitpid(id, NULL, 0);

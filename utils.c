@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:58:14 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 14:38:02 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:44:47 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	ft_error(char *str)
 	perror(str);
 	return (-1);
 }
+
 void	close_2_fd(int fd_in, int fd_out)
 {
 	close(fd_in);

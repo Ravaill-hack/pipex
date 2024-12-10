@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 09:20:34 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 14:39:18 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:44:28 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <errno.h>
 # include <sys/wait.h>
 
-char 	**organize_cmd(int argc, char **argv);
+char	**organize_cmd(int argc, char **argv);
 char	*ft_strjoin3(char *s1, char *s2, char *s3);
 void	ft_free(char **str);
 int		find_line(char *title, char **env);
