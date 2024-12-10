@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:58:14 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 11:25:56 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:38:02 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,27 @@ void	ft_free(char **str)
 	free(str);
 }
 
-int	ft_error(int id)
+int	ft_error(char *str)
 {
-	if (id == 1)
-		ft_putstr_fd("Error : incorrect number of arguments", 2);
-	else if (id == 2)
-		ft_putstr_fd("Error : cannot execute child process", 2);
-	else if (id == 3)
-		ft_putstr_fd("Error : cannot execute parent process", 2);
-	else if (id == 4)
-		ft_putstr_fd("Error : file cannot be opened", 2);
-	else if (id == 5)
-		ft_putstr_fd("Error : file cannot be written", 2);
-	else if (id == 6)
-		ft_putstr_fd("Error : pipe assignation failed", 2);
-	else if (id == 7)
-		ft_putstr_fd("Error : pipe creation failed", 2);
-	else if (id == 8)
-		ft_putstr_fd("Error : fork failed", 2);
-	return (1);
+	perror(str);
+	return (-1);
+}
+void	close_2_fd(int fd_in, int fd_out)
+{
+	close(fd_in);
+	close(fd_out);
+}
+
+void	close_all_fd(int fd_in, int fd_out, int *fd)
+{
+	int	i;
+
+	i = 0;
+	close(fd_in);
+	close(fd_out);
+	while (fd[i])
+	{
+		close(fd[i]);
+		i++;
+	}
 }

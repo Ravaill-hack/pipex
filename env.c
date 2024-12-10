@@ -6,11 +6,29 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:58:25 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 09:19:46 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:36:32 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+char **organize_cmd(int argc, char **argv)
+{
+	int	i;
+	char **cmd;
+
+	i = 2;
+	cmd = malloc((argc - 3 + 1) * sizeof(char*));
+	if (!cmd)
+		return (NULL);
+	while (i < argc - 1)
+	{
+		cmd[i] = ft_strdup(argv[i]);
+		i++;
+	}
+	cmd[i] = NULL;
+	return (cmd);
+}
 
 int	find_line(char *title, char **env)
 {

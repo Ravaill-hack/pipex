@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 09:20:34 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 11:26:03 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:39:18 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,20 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include <errno.h>
+# include <sys/wait.h>
 
+char 	**organize_cmd(int argc, char **argv);
 char	*ft_strjoin3(char *s1, char *s2, char *s3);
 void	ft_free(char **str);
 int		find_line(char *title, char **env);
 char	*first_word(char *str);
 char	*extract_env(char *title, char **env);
 char	*extract_path(char *cmd, char **env);
-int		ft_error(int id);
+int		ft_error(char *str);
+void	close_2_fd(int fd_in, int fd_out);
+void	close_all_fd(int fd_in, int fd_out, int *fd);
+void	wait_for_all_pids(pid_t *id_cmd);
 
 #endif
