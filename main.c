@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/01/06 11:26:05 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:38:08 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	exec_cmd(char *lstcmd, char **env, int fd_in, int fd_out)
 		free(path);
 		exit(EXIT_FAILURE);
 	}
+	ft_free(split_cmd);
+	free(path);
 }
 
 pid_t	exec_2_cmd(int fd_in, int fd_out, char **argv, char **env)

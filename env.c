@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:58:25 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/01/06 11:13:04 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:39:16 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	*extract_path(char *cmd, char **env)
 	}
 	if (raw)
 		ft_free(raw);
-	if (name_cmd)
-		ft_free(name_cmd);
+	ft_free(name_cmd);
 	return (cmd);
 }
