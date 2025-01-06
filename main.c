@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 16:44:16 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:26:05 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,8 @@
 
 void	wait_for_all_pids(pid_t *id_cmd)
 {
-	int	i;
-
-	i = 0;
-	while (id_cmd[i])
-	{
-		waitpid(id_cmd[i], NULL, 0);
-		i++;
-	}
+	waitpid(id_cmd[0], NULL, 0);
+	waitpid(id_cmd[1], NULL, 0);
 }
 
 void	exec_cmd(char *lstcmd, char **env, int fd_in, int fd_out)
@@ -47,7 +41,7 @@ void	exec_cmd(char *lstcmd, char **env, int fd_in, int fd_out)
 	}
 }
 
-pid_t	exec_2_cmd(int fd_in, int fd_out, char **cmd, char **env)
+pid_t	exec_2_cmd(int fd_in, int fd_out, char **argv, char **env)
 {
 	int		fd_pipe[2];
 	pid_t	id_cmd[2];
@@ -60,7 +54,7 @@ pid_t	exec_2_cmd(int fd_in, int fd_out, char **cmd, char **env)
 	if (id_cmd[0] == 0)
 	{
 		close(fd_pipe[0]);
-		exec_cmd(cmd[0], env, fd_in, fd_pipe[1]);
+		exec_cmd(argv[2], env, fd_in, fd_pipe[1]);
 	}
 	id_cmd[1] = fork();
 	if (id_cmd[1] == -1)
@@ -68,7 +62,7 @@ pid_t	exec_2_cmd(int fd_in, int fd_out, char **cmd, char **env)
 	if (id_cmd[1] == 0)
 	{
 		close(fd_pipe[1]);
-		exec_cmd(cmd[1], env, fd_pipe[0], fd_out);
+		exec_cmd(argv[3], env, fd_pipe[0], fd_out);
 	}
 	close_all_fd(fd_in, fd_out, fd_pipe);
 	wait_for_all_pids(id_cmd);
@@ -80,12 +74,9 @@ int	main(int argc, char **argv, char **env)
 	int		fd_in;
 	int		fd_out;
 	pid_t	id;
-	char	**cmd;
 
-	cmd = NULL;
 	if (argc != 5)
 		ft_error("Error : incorrect number of arguments");
-	cmd = organize_cmd(argc, argv);
 	fd_in = open(argv[1], O_RDONLY);
 	if (fd_in == -1)
 	{
@@ -98,7 +89,7 @@ int	main(int argc, char **argv, char **env)
 		ft_error("Error : cannot create or write in outfile");
 		exit(EXIT_FAILURE);
 	}
-	id = exec_2_cmd(fd_in, fd_out, cmd, env);
+	id = exec_2_cmd(fd_in, fd_out, argv, env);
 	close_2_fd(fd_in, fd_out);
 	waitpid(id, NULL, 0);
 }

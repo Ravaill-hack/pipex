@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:58:14 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/12/10 16:44:47 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:25:25 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,13 @@ void	close_2_fd(int fd_in, int fd_out)
 	close(fd_out);
 }
 
-void	close_all_fd(int fd_in, int fd_out, int *fd)
+void	close_all_fd(int fd_in, int fd_out, int fd[2])
 {
 	int	i;
 
 	i = 0;
 	close(fd_in);
 	close(fd_out);
-	while (fd[i])
-	{
-		close(fd[i]);
-		i++;
-	}
+	close(fd[0]);
+	close(fd[1]);
 }
