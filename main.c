@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/01/06 12:42:05 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/01/29 10:45:01 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,41 @@ void	exec_cmd(char *lstcmd, char **env, int fd_in, int fd_out)
 	}
 }
 
-pid_t	exec_2_cmd(int fd_in, int fd_out, char **argv, char **env)
+pid_t	exec_cmds(int fd_in, int fd_out, int argc, char **argv, char **env)
 {
-	int		fd_pipe[2];
-	pid_t	id_cmd[2];
+	int		fd_pipe[argc - 4][2];
+	pid_t	id_cmd[argc - 3];
+	int		i;
 
-	if (pipe(fd_pipe) == -1)
-		return (ft_error("Error : pipe creation failed"));
-	id_cmd[0] = fork();
-	if (id_cmd[0] == -1)
-		return (ft_error("Error : fork execution failed"));
-	if (id_cmd[0] == 0)
+	while (i <= argc - 4)
 	{
-		close(fd_pipe[0]);
-		exec_cmd(argv[2], env, fd_in, fd_pipe[1]);
-	}
-	id_cmd[1] = fork();
-	if (id_cmd[1] == -1)
-		return (ft_error("Error : fork execution failed"));
-	if (id_cmd[1] == 0)
-	{
-		close(fd_pipe[1]);
-		exec_cmd(argv[3], env, fd_pipe[0], fd_out);
+		if (pipe(fd_pipe[i]) == -1)
+			return (ft_error("Error : pipe creation failed"));
+		id_cmd[i] = fork();
+		if (id_cmd[i] == -1)
+			return (ft_error("Error : fork execution failed"));
+		close(fd_pipe[i][0]);
+		if (id_cmd[i] == 0 && i == 0)
+			exec_cmd(argv[2], env, fd_in, fd_pipe[i][1]);
+		else if (id_cmd[i] == 0 && i > 0)
+		{
+			close(fd_pipe[i - 1][0]);
+			exec_cmd(argv[2], env, fd_pipe[i - 1][0], fd_pipe[i][1]);
+		}
+		id_cmd[i + 1] = fork();
+		if (id_cmd[i + 1] == -1)
+				return (ft_error("Error : fork execution failed"));
+		close(fd_pipe[i][1]);
+		if (i < argc - 4 && id_cmd[i + 1] == 0)
+		{
+			if (pipe(fd_pipe[i + 1]) == -1)
+				return (ft_error("Error : pipe creation failed"));
+			close(fd_pipe[i + 1][0]);
+			exec_cmd(argv[3], env, fd_pipe[i][0], fd_pipe[i + 1][1]);
+		}
+		else if (i == argc - 4)
+			exec_cmd(argv[3], env, fd_pipe[i][0], fd_out);
+		i++;
 	}
 	close_all_fd(fd_in, fd_out, fd_pipe);
 	wait_for_all_pids(id_cmd);
@@ -89,7 +102,7 @@ int	main(int argc, char **argv, char **env)
 		ft_error("Error : cannot create or write in outfile");
 		exit(EXIT_FAILURE);
 	}
-	id = exec_2_cmd(fd_in, fd_out, argv, env);
+	id = exec_cmds(fd_in, fd_out, argc, argv, env);
 	close_2_fd(fd_in, fd_out);
 	waitpid(id, NULL, 0);
 }
