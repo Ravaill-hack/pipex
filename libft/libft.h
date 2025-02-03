@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:14:27 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/07 11:59:43 by lmatkows         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:39:54 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,25 @@
 # define LIBFT_H
 
 # include <string.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stdarg.h>
+# ifdef BUFFER_SIZE
+#  if BUFFER_SIZE < 1 || BUFFER_SIZE > 8000000
+#   undef BUFFER_SIZE
+#   define BUFFER_SIZE 4
+#  endif
+# endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4
+# endif
+# define HEXALOW "0123456789abcdef"
+# define HEXAUP "0123456789ABCDEF"
+
+/*
+	libft
+*/
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -50,7 +69,9 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
-// BONUS
+/*
+	libft bonus
+*/
 
 typedef struct s_list
 {
@@ -67,5 +88,41 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/*
+	printf
+*/
+
+int		ft_putchar(int c);
+int		ft_putstr(char *s);
+int		ft_putadr(void *p);
+int		ft_putdec(int d);
+int		ft_putundec(unsigned int u);
+int		ft_putlowhexa(unsigned int x);
+int		ft_putuphexa(unsigned int X);
+int		ft_adrhexa(unsigned long X);
+int		ft_findset(char c, char *set);
+char	ft_symb(const char *arg, int i);
+int		ft_isvar(const char *s, int i);
+int		ft_print_sth(va_list elem, char symb);
+int		ft_printf(const char *arg, ...);
+
+/*
+	GNL
+*/
+
+char	*gnl_strjoin(char *s1, char *s2);
+int		gnl_strlen(char *s);
+char	*gnl_substrto(char *str, char c);
+char	*gnl_substrfrom(char *str, char c);
+int		gnl_strchr(char *str, char c);
+char	*get_next_line(int fd);
+
+/*
+	other
+*/
+
+int		ft_strstr(const char *s1, const char *s2);
+int		ft_atoi_base(const char *str, const char *base);
 
 #endif

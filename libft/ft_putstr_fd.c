@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:20:43 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:27:58 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:12:13 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
 //	affiche une chaine de caracteres sur la sortie file descriptor indiquee
 

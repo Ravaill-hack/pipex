@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:57:19 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:27:23 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:11:04 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 //	Alloue avec MALLOC et retourne une chaine de caracteres representant
 //	l'entier n recu en argument. Les nombres negatifs doivent etre geres.

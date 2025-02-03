@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:24:55 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:28:08 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:12:09 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
 //	affiche un entier sur la sortie file descriptor indiquee
 

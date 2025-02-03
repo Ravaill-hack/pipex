@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 22:48:57 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:27:54 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:12:23 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 //	The  strdup()  function returns a pointer to a new string which is a
 //	duplicate of the string s.  Memory for the new string is obtained with

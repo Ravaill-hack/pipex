@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/02/03 13:40:52 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:08:53 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,41 @@ int	ft_open_fd_in(char *file)
 	return (fd_in);
 }
 
-int	ft_open_fd_out(char *file)
+int	ft_open_fd_out(char *file, int i)
 {
 	int	fd_out;
 
-	fd_out = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (i == 0)
+		fd_out = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else
+		fd_out = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd_out == -1)
 		ft_error("Error : cannot create or write in outfile\n");
 	return (fd_out);
+}
+
+int	ft_here_doc(char *str)
+{
+	int		fd_in;
+	int		fd_out;
+	char	*line;
+
+	fd_in = ft_open_fd_in(str);
+	fd_out = ft_open_fd_out(str, 1);
+	while (1)
+	{
+		line = get_next_line(fd_in);
+		if (!line)
+			return (-1);
+		if (ft_strncmp(line, str, ft_strlen(str)) == 0)
+		{
+			free (line);
+			return (0);
+		}
+		ft_putstr_fd(line, fd_out);
+	}
+	free(line);
+	close_2_fd(fd_in, fd_out);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -89,12 +116,19 @@ int	main(int argc, char **argv, char **env)
 	i = 2;
 	if (argc < 5)
 		return (ft_error("Error : incorrect number of arguments\n"));
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
 	{
-		
+		if (argc == 5)
+			return (ft_error("Error : one argument missing\n"));
+		fd_in_out[0] = ft_open_fd_out(argv[1], 1);
+		ft_here_doc(argv[2]);
+		close (fd_in_out[0]);
+		fd_in_out[0] = ft_open_fd_in(argv[1]);
+		i = 3;
 	}
-	fd_in_out[0] = ft_open_fd_in(argv[1]);
-	fd_in_out[1] = ft_open_fd_out(argv[argc - 1]);
+	else
+		fd_in_out[0] = ft_open_fd_in(argv[1]);
+	fd_in_out[1] = ft_open_fd_out(argv[argc - 1], 0);
 	if (fd_in_out[0] == -1 || fd_in_out[1] == -1)
 		return (-1);
 	if (dup2(fd_in_out[0], STDIN_FILENO) == -1)

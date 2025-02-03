@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:41:08 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/07 14:30:29 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:11:30 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 //	Cree un nouvel element de type t_list initialise avec la valeur content
 

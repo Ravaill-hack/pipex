@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 21:09:22 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/02/03 16:12:52 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:12:59 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 //	locates the first occurrence of the null-terminated string s2 in the string
-//	s1, where not more than n characters are searched. Characters that appear
-//	after a ‘\0’ character are not searched.
-//	If s2 is empty, s1 is returned
-//	If s2 is not found, return NULL, otherwize return pointer to the first
-//	occurence of the first character of s2
+//	s1. Characters that appear after a ‘\0’ character are not searched.
+//	If s2 is empty, -1 is returned
+//	If s2 is not found, return -1, otherwize return the index to the occurence
+//	of the first character of s2
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t n)
+int	ft_strstr(const char *s1, const char *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -29,22 +28,22 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 	j = 0;
 	lens2 = ft_strlen(s2);
 	if (lens2 == 0)
-		return ((char *)&s1[0]);
-	while ((i < n) && (s1[i] != '\0'))
+		return (-1);
+	while (s1[i] != '\0')
 	{
 		if (s1[i] == s2[0])
 		{
 			j = 0;
-			while ((s1[i + j] == s2[j]) && ((i + j) < n))
+			while (s1[i + j] == s2[j])
 			{
 				if ((j + 1) == lens2)
-					return ((char *)&s1[i]);
+					return (i);
 				j++;
 			}
 		}
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 /*

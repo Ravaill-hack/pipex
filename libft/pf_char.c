@@ -1,33 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   pf_char.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 17:00:02 by lmatkows          #+#    #+#             */
-/*   Updated: 2025/02/03 16:11:13 by lmatkows         ###   ########.fr       */
+/*   Created: 2024/11/11 15:24:22 by lmatkows          #+#    #+#             */
+/*   Updated: 2025/02/03 16:13:35 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//	Libere la memoire de tous les elements de la liste avec la fonction del
-//	passee en argument puis avec free. L'adresse initiale de la liste devient
-//	NULL
-
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+int	ft_putchar(int c)
 {
-	t_list	*adr;
+	write (1, &c, 1);
+	return (1);
+}
 
-	adr = NULL;
-	if (!*lst)
-		return ;
-	while (*lst != NULL)
+int	ft_putstr(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (ft_putstr("(null)"));
+	while (s[i])
 	{
-		adr = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = adr;
+		ft_putchar(s[i]);
+		i ++;
 	}
-	*lst = NULL;
+	return (i);
+}
+
+int	ft_putadr(void *p)
+{
+	int				i;
+	unsigned long	ptr;
+
+	i = 0;
+	ptr = (unsigned long)p;
+	if (!p)
+		return (ft_putstr("(nil)"));
+	i = ft_putstr("0x");
+	i = i + ft_adrhexa(ptr);
+	return (i);
 }

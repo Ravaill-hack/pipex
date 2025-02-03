@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:22:19 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:28:10 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:12:03 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
 //	Ecrit la chaine s sur la sortie file descriptor indiquee suivie d'un \n
 

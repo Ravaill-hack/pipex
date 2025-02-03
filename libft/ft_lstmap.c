@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:28:07 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/07 18:27:32 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:11:27 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 //	Itere sur la liste lst et applique la fonction f au contenu de chaque
 //	element. Cree une nouvelle liste resultant des applications successives

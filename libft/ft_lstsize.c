@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:47:03 by lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/07 16:03:19 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:11:37 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 //	Compte le nombre d'elements dans la liste lst
 

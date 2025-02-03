@@ -24,11 +24,13 @@ SRCS_FILES =  \
 	ft_memcmp.c \
 	ft_strnstr.c \
 	ft_atoi.c \
+	ft_atoi_base.c \
 	ft_calloc.c \
 	ft_strdup.c \
 	ft_substr.c \
 	ft_strjoin.c \
 	ft_strtrim.c \
+	ft_strstr.c \
 	ft_split.c \
 	ft_itoa.c \
 	ft_strmapi.c \
@@ -36,9 +38,7 @@ SRCS_FILES =  \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
-	ft_putnbr_fd.c
-
-SRCS_BONUS = \
+	ft_putnbr_fd.c \
 	ft_lstnew.c \
 	ft_lstadd_front.c \
 	ft_lstsize.c \
@@ -47,10 +47,14 @@ SRCS_BONUS = \
 	ft_lstdelone.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
-	ft_lstmap.c
+	ft_lstmap.c \
+	get_next_line_utils.c \
+	get_next_line.c \
+	pf_char.c \
+	pf_number.c \
+	pf_printf.c
 
 OBJS = $(SRCS_FILES:.c=.o)
-BONUS_OBJS = $(SRCS_BONUS:.c=.o)
 
 all: $(NAME)
 
@@ -61,14 +65,11 @@ $(NAME):$(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-bonus: $(OBJS) $(BONUS_OBJS)
-	ar -rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 
 .PHONY: all clean fclean re

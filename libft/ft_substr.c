@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:31:38 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:27:41 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:13:09 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 //	Alloue avec malloc et retourne une chaine de caracteres issue de s,
 //	commencant a start et de longueur maximale len.

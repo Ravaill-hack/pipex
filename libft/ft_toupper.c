@@ -6,9 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:38:48 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:27:37 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:13:18 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 //	convertit un caractere minuscule en majuscule
 

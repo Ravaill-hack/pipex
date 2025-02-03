@@ -6,9 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:47:37 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:27:21 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:11:01 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 //	These  functions  check  whether c falls into a certain character class
 //	according  to the  specified  locale.   The functions without the "_l

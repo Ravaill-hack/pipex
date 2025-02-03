@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 10:35:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:27:42 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:13:02 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 //	Alloue avec malloc et retourne une copie de la chaîne s1, sans les
 //	caractères spécifiés dans ’set’ au début et à la fin de la chaîne de

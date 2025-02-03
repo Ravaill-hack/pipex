@@ -1,41 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 22:05:39 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/02/03 16:10:38 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:10:35 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//	The  atoi() function converts the initial portion of the string pointed to
-//	by nptr to int. atoi() does not detect errors.
+//	The  atoi_base() function converts the initial portion of the string
+//	pointed to by str to int. atoi() does not detect errors.
 //	RETURN VALUE : the converted value or 0 on error.
 
-int	ft_atoi(const char *str)
+static int	to_find_c(char c, const char *str)
 {
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+			return (i);
+		i ++;
+	}
+	return (-1);
+}
+
+int	ft_atoi_base(const char *str, const char *base)
+{
+	size_t	len;
 	size_t	i;
 	int		sign;
 	int		nb;
+	int		ibase;
 
 	i = 0;
+	len = ft_strlen(base);
 	sign = 1;
 	nb = 0;
+	ibase = 0;
 	while (((str[i] >= 9) && (str[i] <= 13)) || (str[i] == 32))
 		i++;
-	if ((str[i] == '+') || (str[i] == '-'))
+	while (to_find_c(str[i], base) >= 0)
 	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while ((str[i] >= '0') && (str[i] <= '9'))
-	{
-		nb = nb * 10 + str[i] - 48;
+		ibase = to_find_c(str[i], base);
+		nb = nb * len + ibase;
 		i++;
 	}
 	return (nb * sign);

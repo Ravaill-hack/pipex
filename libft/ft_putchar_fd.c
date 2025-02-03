@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 14:57:28 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:28:11 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:12:00 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
 //	Ecrit le caractere c sur la sortie file descriptor indiquee
 

@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 14:09:22 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:27:47 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:12:45 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 //	Applique la fonction ’f’ à chaque caractère de la chaîne de caractères s
 //	en passant son index comme premier argument.

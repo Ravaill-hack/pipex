@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 10:12:12 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:27:51 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:12:30 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 //	Alloue (avec malloc(3)) et retourne une nouvelle chaîne, résultat de la
 //	concaténation de s1 et s2.

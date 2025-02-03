@@ -6,12 +6,11 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:51:38 by Lmatkows          #+#    #+#             */
-/*   Updated: 2024/11/05 16:27:57 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:12:17 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 //	Decoupe une chaine de caracteres s suivant un separateur char c
 //	Renvoie NULL si l'alloc echoue, un pointeur vers le tableau sinon
