@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/02/03 10:59:57 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:40:52 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	exec_cmd(char *cmd, char **env)
 	err = execve(path, split_cmd, env);
 	if (err == -1)
 	{
-		perror("Error : processus cannot be executed\n");
+		perror("Error : processus cannot be executed ");
 		ft_free(split_cmd);
 		free(path);
 		exit(EXIT_FAILURE);
@@ -40,7 +40,6 @@ int	exec_cmds(char *cmd, char **env)
 {
 	int		fd_pipe[2];
 	pid_t	id_cmd;
-	int		i;
 
 	if (pipe(fd_pipe) == -1)
 		return (ft_error("Error : pipe creation failed\n"));
@@ -55,13 +54,14 @@ int	exec_cmds(char *cmd, char **env)
 	}
 	else
 	{
+		waitpid(id_cmd, NULL, 0);
 		close(fd_pipe[1]);
 		dup2(fd_pipe[0], 0);
 	}
 	return (0);
 }
 
-int	ft_open_fd_in(int fd, char *file)
+int	ft_open_fd_in(char *file)
 {
 	int	fd_in;
 
@@ -71,7 +71,7 @@ int	ft_open_fd_in(int fd, char *file)
 	return (fd_in);
 }
 
-int	ft_open_fd_out(int fd, char *file)
+int	ft_open_fd_out(char *file)
 {
 	int	fd_out;
 
@@ -85,21 +85,24 @@ int	main(int argc, char **argv, char **env)
 {
 	int		fd_in_out[2];
 	int		i;
-	pid_t	id;
 
 	i = 2;
 	if (argc < 5)
-		ft_error("Error : incorrect number of arguments\n");
-	if (ft_open_fd_in(fd_in_out[0], argv[1]) == -1 || ft_open_fd_out(fd_in_out[1], argv[argc - 1]) == -1)
-		exit(EXIT_FAILURE);
-	if (dup2(fd_in_out[0], STDIN_FILENO) == -1)
-		ft_error("Error : fd_in assignation failed\n");
-	while (i < argc - 2)
+		return (ft_error("Error : incorrect number of arguments\n"));
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 	{
-		exec_cmds(argv[i], env);
-		i++;
+		
 	}
+	fd_in_out[0] = ft_open_fd_in(argv[1]);
+	fd_in_out[1] = ft_open_fd_out(argv[argc - 1]);
+	if (fd_in_out[0] == -1 || fd_in_out[1] == -1)
+		return (-1);
+	if (dup2(fd_in_out[0], STDIN_FILENO) == -1)
+		return (ft_error("Error : fd_in assignation failed\n"));
+	while (i < argc - 2)
+		exec_cmds(argv[i++], env);
 	if (dup2(fd_in_out[1], STDOUT_FILENO) == -1)
-		ft_error("Error : fd_out assignation failed\n");
+		return (ft_error("Error : fd_out assignation failed\n"));
 	exec_cmd(argv[argc - 2], env);
+	close_2_fd(fd_in_out[0], fd_in_out[1]);
 }

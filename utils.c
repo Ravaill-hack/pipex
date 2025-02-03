@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:58:14 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/02/03 09:37:44 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:08:04 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_free(char **str)
 
 int	ft_error(char *str)
 {
-	perror(str);
+	ft_putstr_fd(str, 2);
 	return (-1);
 }
 
