@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/02/03 16:08:53 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:02:12 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,26 +86,26 @@ int	ft_open_fd_out(char *file, int i)
 
 int	ft_here_doc(char *str)
 {
-	int		fd_in;
 	int		fd_out;
 	char	*line;
 
-	fd_in = ft_open_fd_in(str);
 	fd_out = ft_open_fd_out(str, 1);
 	while (1)
 	{
-		line = get_next_line(fd_in);
+		line = get_next_line(0);
 		if (!line)
+		{
+			close (fd_out);
 			return (-1);
+		}
 		if (ft_strncmp(line, str, ft_strlen(str)) == 0)
 		{
 			free (line);
+			close (fd_out);
 			return (0);
 		}
 		ft_putstr_fd(line, fd_out);
 	}
-	free(line);
-	close_2_fd(fd_in, fd_out);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -120,10 +120,8 @@ int	main(int argc, char **argv, char **env)
 	{
 		if (argc == 5)
 			return (ft_error("Error : one argument missing\n"));
-		fd_in_out[0] = ft_open_fd_out(argv[1], 1);
 		ft_here_doc(argv[2]);
-		close (fd_in_out[0]);
-		fd_in_out[0] = ft_open_fd_in(argv[1]);
+		fd_in_out[0] = ft_open_fd_in(argv[2]);
 		i = 3;
 	}
 	else
@@ -135,8 +133,10 @@ int	main(int argc, char **argv, char **env)
 		return (ft_error("Error : fd_in assignation failed\n"));
 	while (i < argc - 2)
 		exec_cmds(argv[i++], env);
+	unlink(argv[2]);
 	if (dup2(fd_in_out[1], STDOUT_FILENO) == -1)
 		return (ft_error("Error : fd_out assignation failed\n"));
 	exec_cmd(argv[argc - 2], env);
 	close_2_fd(fd_in_out[0], fd_in_out[1]);
 }
+	
