@@ -6,6 +6,7 @@ SRCS_FILES =  \
 	utils.c \
 	env.c \
 	main.c \
+	open.c \
 
 OBJS = $(SRCS_FILES:.c=.o)
 

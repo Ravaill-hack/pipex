@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:58:14 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/02/05 14:23:40 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:36:10 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,3 @@ void	close_2_fd(int fd_in, int fd_out)
 	close(fd_in);
 	close(fd_out);
 }
-
