@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/02/03 17:02:12 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:33:00 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,29 +108,43 @@ int	ft_here_doc(char *str)
 	}
 }
 
+int	ft_find_i(char **argv)
+{
+	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
+		return (3);
+	else
+		return (2);
+}
+
+int	ft_find_fd_in(char **argv)
+{
+	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
+		return (ft_open_fd_in(argv[2]));
+	else
+		return (ft_open_fd_in(argv[1]));
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	int		fd_in_out[2];
 	int		i;
 
-	i = 2;
-	if (argc < 5)
+	if (argc < 5
+		|| (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) && argc >= 6))
 		return (ft_error("Error : incorrect number of arguments\n"));
 	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
 	{
-		if (argc == 5)
-			return (ft_error("Error : one argument missing\n"));
 		ft_here_doc(argv[2]);
-		fd_in_out[0] = ft_open_fd_in(argv[2]);
-		i = 3;
+		fd_in_out[1] = ft_open_fd_out(argv[argc - 1], 1);
 	}
 	else
-		fd_in_out[0] = ft_open_fd_in(argv[1]);
-	fd_in_out[1] = ft_open_fd_out(argv[argc - 1], 0);
+		fd_in_out[1] = ft_open_fd_out(argv[argc - 1], 0);
+	fd_in_out[0] = ft_find_fd_in(argv);
 	if (fd_in_out[0] == -1 || fd_in_out[1] == -1)
 		return (-1);
 	if (dup2(fd_in_out[0], STDIN_FILENO) == -1)
 		return (ft_error("Error : fd_in assignation failed\n"));
+	i = ft_find_i(argv);
 	while (i < argc - 2)
 		exec_cmds(argv[i++], env);
 	unlink(argv[2]);
@@ -139,4 +153,3 @@ int	main(int argc, char **argv, char **env)
 	exec_cmd(argv[argc - 2], env);
 	close_2_fd(fd_in_out[0], fd_in_out[1]);
 }
-	
