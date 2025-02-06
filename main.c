@@ -6,7 +6,7 @@
 /*   By: lmatkows <lmatkows@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:22:09 by Lmatkows          #+#    #+#             */
-/*   Updated: 2025/02/05 14:39:21 by lmatkows         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:28:44 by lmatkows         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ int	main(int argc, char **argv, char **env)
 	int		fd_in_out[2];
 	int		i;
 
-	if (argc < 5
-		|| (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) && argc >= 6))
+	if (argc < 5)
 		return (ft_error("Error : incorrect number of arguments\n"));
 	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
+	{
 		ft_here_doc(argv[2]);
-	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
 		fd_in_out[1] = ft_open_fd_out(argv[argc - 1], 1);
+	}
 	else
 		fd_in_out[1] = ft_open_fd_out(argv[argc - 1], 0);
 	fd_in_out[0] = ft_find_fd_in(argv);
